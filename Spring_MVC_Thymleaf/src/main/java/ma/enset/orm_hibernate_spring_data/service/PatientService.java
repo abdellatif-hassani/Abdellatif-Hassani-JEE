@@ -2,7 +2,6 @@ package ma.enset.orm_hibernate_spring_data.service;
 
 import jakarta.transaction.Transactional;
 import ma.enset.orm_hibernate_spring_data.dto.PatientDTO;
-import ma.enset.orm_hibernate_spring_data.entities.Patient;
 import ma.enset.orm_hibernate_spring_data.mappers.PatientMapper;
 import ma.enset.orm_hibernate_spring_data.repository.PatientRepository;
 import org.springframework.stereotype.Service;
@@ -23,9 +22,12 @@ public class PatientService implements IPatientService{
     public void add(PatientDTO patient) {
         patientRepository.save(patientMapper.toPatient(patient));
     }
+    //Retrieving patients by name
+    public List<PatientDTO> getPatients(String keyword) {
+        return patientMapper.toPatientDTOs(patientRepository.findPatientByNameContainsIgnoreCase(keyword));
+    }
 
-    //Retrieving all patients
-    public List<PatientDTO> getAllPatients() {
-        return patientMapper.toPatientDTOs(patientRepository.findAll());
+    public void deletePatient(Long id) {
+        patientRepository.deleteById(id);
     }
 }

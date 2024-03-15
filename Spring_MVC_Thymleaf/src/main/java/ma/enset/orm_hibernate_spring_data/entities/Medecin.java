@@ -2,15 +2,12 @@ package ma.enset.orm_hibernate_spring_data.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Collection;
-import java.util.List;
 
 @Entity
-@Data @AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor @NoArgsConstructor @Getter  @Setter
 public class Medecin {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

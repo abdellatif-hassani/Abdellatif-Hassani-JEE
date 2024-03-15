@@ -1,12 +1,10 @@
 package ma.enset.orm_hibernate_spring_data.other_entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Data @AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor @NoArgsConstructor @Getter @Setter
 @DiscriminatorValue("person")
 public class Person {
     @Id @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)

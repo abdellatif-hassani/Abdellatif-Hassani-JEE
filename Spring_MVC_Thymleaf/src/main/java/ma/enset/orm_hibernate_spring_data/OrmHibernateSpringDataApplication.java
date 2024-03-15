@@ -45,7 +45,7 @@ public class OrmHibernateSpringDataApplication {
             patients.forEach(p -> System.out.println(p.getName()+" "+p.getBirthDay()));
             System.out.println("+++++++++++++");
             //Searching for a patients by name
-            patientRepository.findPatientByName("Hassani").forEach(p ->
+            patientRepository.findPatientByNameContainsIgnoreCase("Hassani").forEach(p ->
                     System.out.println(p.getName()+" "+p.getBirthDay())
             );
             //Searching for a patients by keyword

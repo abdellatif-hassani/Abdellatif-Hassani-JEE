@@ -1,14 +1,12 @@
 package ma.enset.orm_hibernate_spring_data.other_entities;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor
-@DiscriminatorValue("teacher")
+@AllArgsConstructor @NoArgsConstructor @Getter  @Setter
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TYPE", discriminatorType = DiscriminatorType.STRING)
 public class Teacher extends Person{
     private String speciality;
 }
