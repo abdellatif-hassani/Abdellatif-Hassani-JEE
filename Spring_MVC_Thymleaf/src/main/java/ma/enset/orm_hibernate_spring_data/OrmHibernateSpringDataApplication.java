@@ -24,7 +24,7 @@ public class OrmHibernateSpringDataApplication {
     CommandLineRunner start(PatientRepository patientRepository, MedecinRepository medecinRepository){
         return args -> {
             //Adding A list of patients
-            Stream.of("Abdellatif", "Hassani", "Abdeslam", "Achraf").forEach(name -> {
+            Stream.of("Abdellatif", "Hassani", "Abdeslam", "Hassan", "Abdellah", "Achraf").forEach(name -> {
                 Patient patient = new Patient();
                 patient.setName(name);
                 patient.setBirthDay(new Date());

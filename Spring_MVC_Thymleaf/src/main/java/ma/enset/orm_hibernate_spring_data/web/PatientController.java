@@ -26,7 +26,7 @@ public class PatientController {
     public String index(Model model,
                         @RequestParam(name = "keyword", defaultValue = "") String keyword,
                         @RequestParam(name = "page", defaultValue = "1") int page,
-                        @RequestParam(name = "size", defaultValue = "3") int size){
+                        @RequestParam(name = "size", defaultValue = "4") int size){
         Pageable pageable = PageRequest.of(page-1, size);
         Page<PatientDTO> patients = patientService.getPatients(keyword, pageable);
         int currentPage = patients.getNumber()+1;
@@ -40,17 +40,21 @@ public class PatientController {
         model.addAttribute("totalPages", pages);
         return "patients";
     }
+
     //Deleting a patient
     @GetMapping("/delete")
     public String delete(@RequestParam(name = "id") Long id){
         patientService.deletePatient(id);
         return "redirect:/patients";
     }
+
     //Showing the edit form
     @GetMapping("/editForm")
-    public String showEditForm(Model model, @RequestParam(name = "id") Long id){
+    public String showEditForm(Model model, @RequestParam(name = "id") Long id,
+                               @RequestParam(name = "currentPage") int currentPage){
         PatientDTO patient = patientService.getPatient(id);
         model.addAttribute("patient", patient);
+        model.addAttribute("currentPage", currentPage);
         return "editPatient";
     }
     @PostMapping("/edit")
@@ -58,8 +62,25 @@ public class PatientController {
                        @RequestParam(name = "name") String name,
                        @RequestParam(name = "score") int score,
                        @RequestParam(name = "sick", defaultValue = "false") boolean sick,
+                       @RequestParam(name = "page") int page,
                        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam(name = "birthDay") Date birthDay){
         PatientDTO patientDTO = patientService.editPatient(id, name, score, birthDay, sick);
+        return "redirect:/patients?page="+page;
+    }
+
+    @GetMapping("/addForm")
+    public String showAddForm(){
+        return "addPatient";
+    }
+
+    @PostMapping("/add")
+    public String add(@RequestParam(name = "name") String name,
+                      @RequestParam(name = "score") int score,
+                      @RequestParam(name = "sick", defaultValue = "false") boolean sick,
+                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam(name = "birthDay") Date birthDay){
+        PatientDTO patientDTO = new PatientDTO(null, name, birthDay, sick, score);
+        patientService.add(patientDTO);
         return "redirect:/patients";
     }
+
 }

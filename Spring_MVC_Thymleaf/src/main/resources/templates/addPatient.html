@@ -13,38 +13,32 @@
             </div>
             <div class="card-body">
                 <div class="form-group m-2 mb-3">
-                    <form th:action="@{/patients/edit}" method="post">
-                        <input type="hidden" class="form-control" name="id"
-                        th:value="${patient.id}">
-                        <input type="hidden" class="form-control" name="page"
-                               th:value="${currentPage}">
+                    <form th:action="@{/patients/add}" method="post">
+                        <input type="hidden" class="form-control" name="page">
                         <div class="col-sm-6 mt-2">
                             <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name"
-                            th:value="${patient.name}">
+                            <input type="text" class="form-control" id="name" name="name">
                         </div>
                         <div class="col-sm-6 mt-2">
                             <label for="score">Score</label>
-                            <input type="number" class="form-control" id="score" name="score"
-                            th:value="${patient.score}">
+                            <input type="number" class="form-control" id="score" name="score">
                         </div>
                         <div class="col-sm-6 mt-2">
                             <label for="birthDay">Birth Day</label>
-                            <input type="date" class="form-control" id="birthDay" name="birthDay"
-                            th:value="${patient.birthDay}">
+                            <input type="date" class="form-control" id="birthDay" name="birthDay">
                         </div>
                         <div class="col-sm-6 mt-2">
                             <label for="sick">Sick</label>
-                            <input type="checkbox" class="form-check-input" id="sick" name="sick"
-                            th:checked="${patient.sick}">
+                            <input type="checkbox" class="form-check-input" id="sick" name="sick">
                         </div>
                         <div class="col-sm-6 mt-2">
-                            <input type="submit" class="btn btn-success" value="Edit">
+                            <input type="submit" class="btn btn-success" value="Add">
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 </body>
 </html>
