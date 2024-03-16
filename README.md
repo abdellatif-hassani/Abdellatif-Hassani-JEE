@@ -12,3 +12,7 @@ This project showcases the implementation of dependency injection using both sta
 This repository demonstrates the implementation of Hibernate ORM using Spring Data, focusing on JPA entities, JpaRepository, database configuration, and creating RESTful APIs.
 
 Technologies Used: Java, Spring Data JPA, Hibernate ORM, H2 Database (for testing), MySQL.
+
+### 3. Server-side rendering : SpringMVC & thymeleaf 
+
+This repository demonstrates the development of a simple web application using Spring MVC and Thymeleaf. It covers essential aspects such as controller mappings, HTML templating with Thymeleaf, form submissions, request handling, and basic CRUD operations.
