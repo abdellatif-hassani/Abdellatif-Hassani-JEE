@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface PatientRepository extends IRepository<Patient, Long> {
     List<Patient> findPatientByNameContainsIgnoreCase(String name);
+
 }

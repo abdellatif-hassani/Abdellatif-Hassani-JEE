@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Patient</title>
@@ -9,11 +9,11 @@
     <div class="container mt-2">
         <div class="card p-2 justify-content-center">
             <div class="card-title">
-                <h2>List of clients</h2>
+                <h2>List of Patients</h2>
             </div>
             <div class="card-body">
                 <div class="form-group m-2 mb-3">
-                    <form action="/patients/search" method="get">
+                    <form th:action="@{/patients}" method="get">
                         <label for="name">Name</label>
                         <input type="text" class="mt-2" id="name" name="keyword">
                         <input type="submit" class="btn btn-success" value="Search">
@@ -32,7 +32,7 @@
                         <td th:text="${p.birthDay}"></td>
                         <td th:text="${p.score}"></td>
                         <td>
-                            <a th:href="@{/patients/edit(id=${p.id})}" class="btn btn-primary">Edit</a>
+                            <a th:href="@{/patients/editForm(id=${p.id})}" class="btn btn-primary">Edit</a>
                             <a th:href="@{/patients/delete(id=${p.id})}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>

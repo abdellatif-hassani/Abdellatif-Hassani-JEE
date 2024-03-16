@@ -2,10 +2,12 @@ package ma.enset.orm_hibernate_spring_data.service;
 
 import jakarta.transaction.Transactional;
 import ma.enset.orm_hibernate_spring_data.dto.PatientDTO;
+import ma.enset.orm_hibernate_spring_data.entities.Patient;
 import ma.enset.orm_hibernate_spring_data.mappers.PatientMapper;
 import ma.enset.orm_hibernate_spring_data.repository.PatientRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,5 +31,17 @@ public class PatientService implements IPatientService{
 
     public void deletePatient(Long id) {
         patientRepository.deleteById(id);
+    }
+
+    public PatientDTO editPatient(Long id, String name, int score, Date birthDay) {
+        Patient patient = patientRepository.findById(id).get();
+        patient.setName(name);
+        patient.setScore(score);
+        patient.setBirthDay(birthDay);
+        return patientMapper.toPatientDTO(patientRepository.save(patient));
+    }
+
+    public PatientDTO getPatient(Long id) {
+        return patientMapper.toPatientDTO(patientRepository.findById(id).get());
     }
 }
