@@ -2,6 +2,7 @@ package ma.enset.orm_hibernate_spring_data.mappers;
 
 import ma.enset.orm_hibernate_spring_data.dto.PatientDTO;
 import ma.enset.orm_hibernate_spring_data.entities.Patient;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,5 +32,8 @@ public class PatientMapper {
     }
     public List<Patient> toPatients(List<PatientDTO> patientDTOs) {
         return patientDTOs.stream().map(this::toPatient).toList();
+    }
+    public Page<PatientDTO> toPatientDTOs(Page<Patient> patients) {
+        return patients.map(this::toPatientDTO);
     }
 }

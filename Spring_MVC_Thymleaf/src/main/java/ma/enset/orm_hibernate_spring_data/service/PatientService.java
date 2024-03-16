@@ -5,10 +5,12 @@ import ma.enset.orm_hibernate_spring_data.dto.PatientDTO;
 import ma.enset.orm_hibernate_spring_data.entities.Patient;
 import ma.enset.orm_hibernate_spring_data.mappers.PatientMapper;
 import ma.enset.orm_hibernate_spring_data.repository.PatientRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
+
 
 @Service
 @Transactional
@@ -25,8 +27,8 @@ public class PatientService implements IPatientService{
         patientRepository.save(patientMapper.toPatient(patient));
     }
     //Retrieving patients by name
-    public List<PatientDTO> getPatients(String keyword) {
-        return patientMapper.toPatientDTOs(patientRepository.findPatientByNameContainsIgnoreCase(keyword));
+    public Page<PatientDTO> getPatients(String keyword, Pageable pageable) {
+        return patientMapper.toPatientDTOs(patientRepository.findPatientByNameContainsIgnoreCase(keyword, pageable));
     }
 
     public void deletePatient(Long id) {
