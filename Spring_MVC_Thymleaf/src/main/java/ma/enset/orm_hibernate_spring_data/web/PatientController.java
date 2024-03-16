@@ -32,7 +32,6 @@ public class PatientController {
         int currentPage = patients.getNumber()+1;
         long totalItems = patients.getTotalElements();
         int pages = patients.getTotalPages();
-        System.out.println("currentPage = " + currentPage+" totalItems = "+totalItems+" pages = "+pages);
         model.addAttribute("patients", patients);
         model.addAttribute("keyword", keyword);
         model.addAttribute("currentPage", currentPage);
