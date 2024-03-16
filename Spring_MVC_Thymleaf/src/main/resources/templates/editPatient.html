@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container mt-2">
-        <div class="card p-2 justify-content-center">
+    <div class="container mt-2 justify-content-center">
+        <div class="card p-2 align-content-center col-sm-8">
             <div class="card-title">
                 <h2> Updating a patient</h2>
             </div>
@@ -16,20 +16,25 @@
                     <form th:action="@{/patients/edit}" method="post">
                         <input type="hidden" class="form-control" name="id"
                         th:value="${patient.id}">
-                        <label for="name">Name</label>
                         <div class="col-sm-6 mt-2">
+                            <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name"
                             th:value="${patient.name}">
                         </div>
-                        <label for="score">Score</label>
                         <div class="col-sm-6 mt-2">
+                            <label for="score">Score</label>
                             <input type="number" class="form-control" id="score" name="score"
                             th:value="${patient.score}">
                         </div>
-                        <label for="birthDay">Birth Day</label>
                         <div class="col-sm-6 mt-2">
+                            <label for="birthDay">Birth Day</label>
                             <input type="date" class="form-control" id="birthDay" name="birthDay"
                             th:value="${patient.birthDay}">
+                        </div>
+                        <div class="col-sm-6 mt-2">
+                            <label for="sick">Sick</label>
+                            <input type="checkbox" class="form-check-input" id="sick" name="sick"
+                            th:checked="${patient.sick}">
                         </div>
                         <div class="col-sm-6 mt-2">
                             <input type="submit" class="btn btn-success" value="Edit">

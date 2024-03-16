@@ -25,6 +25,7 @@ public class PatientController {
     public String index(Model model, @RequestParam(name = "keyword", defaultValue = "") String keyword){
         List<PatientDTO> patients = patientService.getPatients(keyword);
         model.addAttribute("patients", patients);
+        model.addAttribute("keyword", keyword);
         return "patients";
     }
     //Deleting a patient
@@ -44,8 +45,10 @@ public class PatientController {
     public String edit(@RequestParam(name = "id") Long id,
                        @RequestParam(name = "name") String name,
                        @RequestParam(name = "score") int score,
+                       @RequestParam(name = "sick", defaultValue = "false") boolean sick,
                        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam(name = "birthDay") Date birthDay){
-        PatientDTO patientDTO = patientService.editPatient(id, name, score, birthDay);
+        System.out.println(sick);
+        PatientDTO patientDTO = patientService.editPatient(id, name, score, birthDay, sick);
         System.out.println("test");
         return "redirect:/patients";
     }

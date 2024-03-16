@@ -33,11 +33,12 @@ public class PatientService implements IPatientService{
         patientRepository.deleteById(id);
     }
 
-    public PatientDTO editPatient(Long id, String name, int score, Date birthDay) {
+    public PatientDTO editPatient(Long id, String name, int score, Date birthDay, boolean sick) {
         Patient patient = patientRepository.findById(id).get();
         patient.setName(name);
         patient.setScore(score);
         patient.setBirthDay(birthDay);
+        patient.setSick(sick);
         return patientMapper.toPatientDTO(patientRepository.save(patient));
     }
 
