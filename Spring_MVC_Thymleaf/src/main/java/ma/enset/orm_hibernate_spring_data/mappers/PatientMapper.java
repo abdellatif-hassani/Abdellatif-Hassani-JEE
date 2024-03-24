@@ -36,4 +36,5 @@ public class PatientMapper {
     public Page<PatientDTO> toPatientDTOs(Page<Patient> patients) {
         return patients.map(this::toPatientDTO);
     }
+
 }

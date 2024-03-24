@@ -82,4 +82,9 @@ public class PatientController {
         return "redirect:/patients";
     }
 
+    @GetMapping("/template")
+    public String template(){
+        return "template";
+    }
+
 }
