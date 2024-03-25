@@ -1,5 +1,6 @@
 package ma.enset.orm_hibernate_spring_data.web;
 
+import jakarta.validation.Valid;
 import ma.enset.orm_hibernate_spring_data.dto.PatientDTO;
 import ma.enset.orm_hibernate_spring_data.service.PatientService;
 import org.springframework.data.domain.Page;
@@ -7,10 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 import java.util.Date;
 
@@ -37,6 +36,7 @@ public class PatientController {
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalItems", totalItems);
         model.addAttribute("totalPages", pages);
+        System.out.println("Total pages: "+pages);
         return "patients";
     }
 
@@ -57,13 +57,13 @@ public class PatientController {
         return "editPatient";
     }
     @PostMapping("/edit")
-    public String edit(@RequestParam(name = "id") Long id,
-                       @RequestParam(name = "name") String name,
-                       @RequestParam(name = "score") int score,
-                       @RequestParam(name = "sick", defaultValue = "false") boolean sick,
-                       @RequestParam(name = "page") int page,
-                       @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam(name = "birthDay") Date birthDay){
-        PatientDTO patientDTO = patientService.editPatient(id, name, score, birthDay, sick);
+    public String edit(@Valid @ModelAttribute("patientDTO") PatientDTO patient, BindingResult result,
+                       @RequestParam(name = "page") int page){
+        if (result.hasErrors()) {
+                System.out.println("Edit Form Error : "+result.getFieldError().getDefaultMessage());
+                 return "editPatient";
+        }
+        patientService.editPatient(patient);
         return "redirect:/patients?page="+page;
     }
 
@@ -73,18 +73,18 @@ public class PatientController {
     }
 
     @PostMapping("/add")
-    public String add(@RequestParam(name = "name") String name,
-                      @RequestParam(name = "score") int score,
-                      @RequestParam(name = "sick", defaultValue = "false") boolean sick,
-                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam(name = "birthDay") Date birthDay){
-        PatientDTO patientDTO = new PatientDTO(null, name, birthDay, sick, score);
-        patientService.add(patientDTO);
+    public String add(@Valid @ModelAttribute("patientDTO") PatientDTO patient, BindingResult result){
+        if (result.hasErrors()) {
+            System.out.println("errop");
+            return "patients";
+        }
+        patientService.add(patient);
         return "redirect:/patients";
     }
 
-    @GetMapping("/template")
-    public String template(){
-        return "template";
-    }
+    /*@GetMapping("/error")
+    public String error(){
+        return "error";
+    }*/
 
 }

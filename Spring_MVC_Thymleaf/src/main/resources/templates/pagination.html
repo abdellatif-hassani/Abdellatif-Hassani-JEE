@@ -5,27 +5,26 @@
     <title>pagination</title>
 </head>
 <body>
-    <nav aria-label="..." th:fragment="pagination">
-      <ul class="pagination">
-        <li th:class="${currentPage>1?'page-item':'page-item disabled'}">
-          <a class="page-link" th:href="@{/patients(page=${currentPage-1},
+        <nav aria-label="..." th:fragment="pagination">
+            <div th:if="${totalPages > 1}">
+            <ul class="pagination">
+                <li th:class="${currentPage>1?'page-item':'page-item disabled'}">
+                    <a class="page-link" th:href="@{/patients(page=${currentPage-1},
                                  keyword=${keyword} )}"
-             tabindex="-1" aria-disabled="true">Previous</a>
-        </li>
-        <li th:each="i : ${#numbers.sequence(1, totalPages)}"
-            th:class="${currentPage==i?'page-item active':'page-item'}">
-          <a class="page-link" th:href="@{/patients(page=${i}, keyword=${keyword})}" th:text="${i}"></a>
-        </li>
-        <!--                        <li class="page-item active" aria-current="page">-->
-        <!--                            <a class="page-link" href="#">2</a>-->
-        <!--                        </li>-->
-        <li th:class="${currentPage<totalPages?'page-item':'page-item disabled'}">
-          <a class="page-link" th:href="@{/patients(page=${currentPage+1}, keyword=${keyword}
+                       tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                <li th:each="i : ${#numbers.sequence(1, totalPages)}"
+                    th:class="${currentPage==i?'page-item active':'page-item'}">
+                    <a class="page-link" th:href="@{/patients(page=${i}, keyword=${keyword})}" th:text="${i}"></a>
+                </li>
+                <li th:class="${currentPage<totalPages?'page-item':'page-item disabled'}">
+                    <a class="page-link" th:href="@{/patients(page=${currentPage+1}, keyword=${keyword}
                                  )}">
-            Next
-          </a>
-        </li>
-      </ul>
-    </nav>
+                        Next
+                    </a>
+                </li>
+            </ul>
+            </div>
+        </nav>
 </body>
 </html>
