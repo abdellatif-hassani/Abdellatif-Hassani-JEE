@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
-@DiscriminatorValue("person")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TYPE", discriminatorType = DiscriminatorType.STRING)
 public class Person {
     @Id @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;

@@ -9,12 +9,12 @@
 </head>
 <body>
     <div class="container mt-2" layout:fragment="content">
-        <div class="card p-2 justify-content-center col-sm-8">
+        <div class="card p-2 justify-content-center">
             <div class="card-title">
                 <h2> Updating a patient</h2>
             </div>
             <div class="card-body">
-                <div class="form-group m-2 mb-3">
+                <div class="form-group m-2 mb-3 row">
                     <form th:action="@{/patients/edit}" method="post">
                         <input type="hidden" class="form-control" name="id"
                         th:value="${patient.id}">

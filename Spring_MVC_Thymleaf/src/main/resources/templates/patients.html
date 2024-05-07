@@ -67,12 +67,12 @@
                         </tr>
                         </tbody>
                     </table>
-                    <div th:replace="pagination :: pagination"></div>
+                    <div th:replace="~{pagination :: pagination}"></div>
                 </div>
             </div>
 
 <!--            referencing the addPatientForm.html file-->
-            <div th:replace="addPatientForm :: addPatientModal"></div>
+            <div th:replace="~{addPatientForm :: addPatientModal}"></div>
 
         </div>
     </div>

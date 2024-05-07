@@ -16,7 +16,7 @@ import java.util.Date;
 @Controller
 @RequestMapping("/patients")
 public class PatientController {
-    private PatientService patientService;
+    private final PatientService patientService;
     public PatientController(PatientService patientService) {
         this.patientService = patientService;
     }
@@ -86,5 +86,10 @@ public class PatientController {
     public String error(){
         return "error";
     }*/
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
 
 }
